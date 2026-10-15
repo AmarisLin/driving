@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#6553b8">
+<meta name="description" content="一趟看似簡單的城市小旅行。自己觀察車況、通過三個路口，再把車好好停妥。">
+<title>開車模擬器｜慢慢開，平安到</title>
+<style>
+:root{--ink:#303044;--muted:#858398;--purple:#7660c3;--purple-dark:#5b459e;--lavender:#ede8fa;--line:#e9e6ef;--bg:#f6f4fa;--green:#487a68;--red:#bf5267;--white:#fff;--shadow:0 10px 40px #44356b08}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:ui-rounded,"PingFang TC","Microsoft JhengHei",system-ui,sans-serif;font-size:14px;line-height:1.5}button{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}button:focus-visible,summary:focus-visible{outline:3px solid #aa93ea;outline-offset:4px}button{transition:background .18s,transform .18s,color .18s}button:active:not(:disabled){transform:translateY(1px)}button:disabled{opacity:.4;cursor:not-allowed}svg{vertical-align:middle}.icon{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}.app{max-width:1230px;margin:auto;padding:26px 34px 24px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:24px;border-bottom:1px solid var(--line)}.brand{display:flex;gap:11px;align-items:center;font-weight:800;letter-spacing:.06em}.brand-mark{display:grid;place-items:center;background:var(--purple);color:white;width:37px;height:37px;border-radius:12px}.brand small{display:block;font-size:9px;font-weight:500;letter-spacing:.16em;color:var(--muted);margin-top:1px}.help-button{display:flex;gap:7px;align-items:center;border:0;background:transparent;color:#777387;font-size:12px}.intro{display:flex;align-items:flex-end;justify-content:space-between;padding:25px 0 23px;gap:15px}.eyebrow{color:var(--purple);font-size:10px;letter-spacing:.2em;font-weight:800}.intro h1{font-size:29px;letter-spacing:.035em;line-height:1.4;margin:5px 0}.intro p{color:var(--muted);font-size:12px;margin:5px 0 0}.trip-label{display:flex;align-items:center;gap:7px;color:#8e879c;font-size:11px;white-space:nowrap;margin-bottom:6px}.dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#9e8dd1}.layout{display:grid;grid-template-columns:minmax(0,1fr) 292px;gap:20px}.card{background:white;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);overflow:hidden}.scene-top{display:flex;align-items:center;justify-content:space-between;padding:17px 21px}.scene-title{font-weight:750;font-size:13px;display:flex;align-items:center;gap:9px}.scene-title .dot{background:#78ad94;box-shadow:0 0 0 4px #edf5f0}.pill{font-size:10px;border:1px solid var(--line);border-radius:25px;padding:4px 10px;color:#888297}.scene{height:316px;position:relative;overflow:hidden;background:#e9e7f5}canvas{width:100%;height:100%;display:block}.scene-caption{position:absolute;top:17px;left:20px;background:#ffffffdf;backdrop-filter:blur(8px);border:1px solid #ffffff7f;border-radius:11px;padding:8px 12px;display:flex;align-items:center;gap:8px;font-size:11px;color:#625a79}.scene-caption .icon{width:16px;height:16px}.traffic{position:absolute;right:21px;top:17px;background:#343544;padding:7px;border-radius:14px;display:flex;gap:6px;box-shadow:0 4px 12px #38364b17}.lamp{width:15px;height:15px;border-radius:50%;background:#575563}.lamp.red.on{background:#e87880;box-shadow:0 0 11px #e8788055}.lamp.green.on{background:#80c6a1;box-shadow:0 0 11px #80c6a177}.road-sign{position:absolute;top:64px;right:20px;max-width:180px;background:#ffffffeb;padding:5px 10px;border-radius:8px;font-size:10px;color:#676077}.moto-notice{position:absolute;bottom:50px;left:50%;transform:translateX(-50%);background:#fff3ddeb;border:1px solid #e9d3aa;border-radius:10px;padding:8px 13px;font-size:11px;color:#967343;white-space:nowrap}.scene-bottom{position:absolute;bottom:13px;left:20px;right:20px;display:flex;justify-content:space-between;font-size:10px;color:#fff;text-shadow:0 1px 4px #494354}.location{display:flex;gap:5px;align-items:center}.scene-bottom .icon{width:13px;height:13px}.instruments{display:grid;grid-template-columns:1fr 1fr 1.2fr;padding:17px 0;background:white}.instrument{padding:0 22px;border-right:1px solid var(--line)}.instrument:last-child{border:0}.label{color:var(--muted);font-size:10px;letter-spacing:.06em}.speed-number{font-size:28px;font-weight:750;line-height:1.2;font-variant-numeric:tabular-nums}.speed-number small{font-size:10px;font-weight:500;color:var(--muted);padding-left:6px}.gear-value{font-size:28px;font-weight:750;line-height:1.2;color:var(--purple)}.fuel-bars{display:flex;gap:4px;margin-top:6px;height:17px}.fuel-cell{height:17px;flex:1;max-width:12px;border-radius:3px;background:#eeeaf5}.fuel-cell.filled{background:#b6a6df}.fuel-cell.unknown{background:repeating-linear-gradient(135deg,#eeeaf5,#eeeaf5 3px,#f8f5fc 3px,#f8f5fc 6px)}.fuel-state{font-size:9px;color:#9990a6;margin-top:3px}.controls{margin-top:17px;padding:20px 21px 16px}.card-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:16px}.card-heading h2{font-size:13px;margin:0;display:flex;align-items:center;gap:8px}.card-heading h2 .icon{width:17px;height:17px;color:var(--purple)}.card-heading span{font-size:10px;color:var(--muted)}.control-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.control{border:1px solid var(--line);background:#fcfbfe;color:#6c657e;padding:12px 5px;border-radius:12px;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:11px;min-height:73px}.control:hover:not(:disabled){background:#f4effd;border-color:#d5c9ef}.control.active{background:#efebf9;border-color:#d8cef0;color:var(--purple-dark)}.control.active .mini-status{color:var(--purple)}.mini-status{font-size:9px;color:#aaa3b6}.control .icon{width:21px;height:21px}.gear-control,.signals{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:15px}.control-label{font-size:11px;color:#7c748b;display:flex;gap:7px;align-items:center}.control-label .icon{width:16px;height:16px}.segments{display:flex;background:#f6f3fa;border-radius:9px;padding:3px;gap:3px}.segment{border:0;border-radius:7px;background:transparent;padding:5px 15px;font-size:12px;color:#a198b0;min-width:44px}.segment.active{color:var(--purple-dark);background:white;box-shadow:0 2px 7px #47396e0c;font-weight:750}.segment .icon{width:16px;height:16px}.signals{border-top:1px solid #f1eef6;margin-top:12px;padding-top:12px}.side{display:flex;flex-direction:column;gap:17px}.route-card{padding:21px}.route-card h2{font-size:13px;margin:0 0 18px}.route-top{display:flex;justify-content:space-between;align-items:center}.route-top span{font-size:10px;color:#aaa1ba}.route-list{list-style:none;padding:0;margin:0}.route-item{display:flex;gap:13px;position:relative;padding-bottom:22px}.route-item:not(:last-child):before{content:"";position:absolute;left:12px;top:27px;width:1px;height:calc(100% - 28px);background:#e9e3f3}.route-item:last-child{padding-bottom:0}.route-num{width:26px;height:26px;display:grid;place-items:center;flex-shrink:0;border:1px solid #ece7f5;border-radius:9px;font-size:10px;color:#b3a8c5;background:#fbf9fe}.route-item.current .route-num{background:var(--purple);border-color:var(--purple);color:white}.route-item.done .route-num{background:#edf5f0;color:#68a085;border-color:#e0ece4}.route-text{font-size:11px;color:#a49aae;padding-top:1px}.route-short{display:none}.route-text small{display:block;font-size:9px;color:#bcb3c6;margin-top:2px}.route-item.current .route-text{color:#574a70;font-weight:750}.route-item.done .route-text{color:#879a8c}.drive-card{padding:21px}.drive-card h2{font-size:13px;margin:0 0 5px}.drive-card p{font-size:10px;color:var(--muted);margin:0 0 15px}.steer-buttons{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}.steer{border:1px solid var(--line);border-radius:11px;background:white;color:#8c809e;display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 0;font-size:10px}.steer .icon{width:21px;height:21px}.steer:hover:not(:disabled){background:#f6f2fc}.pedals{display:grid;grid-template-columns:1fr 1.25fr;gap:9px;margin-top:11px}.pedal{border:0;border-radius:11px;min-height:58px;padding:10px;font-weight:700;font-size:12px;display:flex;gap:7px;align-items:center;justify-content:center}.pedal .icon{width:17px;height:17px}.brake{background:#eeeaf3;color:#82748e}.brake.active{background:#e6dff4;color:#664f91;box-shadow:inset 0 0 0 1px #cbbde4}.gas{color:white;background:var(--purple)}.gas:hover:not(:disabled){background:var(--purple-dark)}.exit-actions{display:flex;gap:8px;margin-top:11px}.exit-action{flex:1;border:1px solid var(--line);border-radius:9px;background:#fcfbfe;padding:9px 5px;font-size:11px;color:#8b809a}.exit-action.active{background:#edf5f0;color:var(--green);border-color:#dcebe0}.status-card{padding:16px 19px;background:#f0ecf7;border:1px solid #e9e2f4;border-radius:15px;display:flex;gap:10px;align-items:flex-start;color:#8f7fa8;font-size:10px;line-height:1.8}.status-card .icon{width:16px;height:16px;margin-top:2px}.status-card p{margin:0}.status-card strong{color:#7a668f;font-weight:600}.status-card.event{background:#fff6e6;border-color:#f0e0c3;color:#997941}.foot{display:flex;justify-content:space-between;gap:10px;font-size:9px;color:#b2a9bd;margin-top:21px}.foot span{display:flex;gap:5px;align-items:center}.foot .icon{width:12px;height:12px}.overlay{position:fixed;inset:0;z-index:20;background:#30264168;backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:22px;overflow:auto}.overlay[hidden],[hidden]{display:none!important}.modal{width:min(100%,460px);max-height:calc(100dvh - 44px);overflow:auto;background:white;border-radius:25px;padding:31px;text-align:center;box-shadow:0 24px 100px #36254828}.result-mark{margin:0 auto 15px;width:66px;height:66px;border-radius:23px;display:grid;place-items:center;background:#faedf0;color:var(--red)}.result-mark .icon{width:31px;height:31px}.modal.success .result-mark{background:#edf5ef;color:var(--green)}.modal h2{font-size:23px;margin:8px 0 11px;letter-spacing:.025em}.modal .result-message{font-size:13px;color:#817589;line-height:1.9;margin:0 0 23px}.modal .primary{display:block;width:100%;border:0;border-radius:12px;background:var(--purple);color:white;padding:13px;font-weight:700;font-size:13px}.modal .result-note{font-size:10px;color:#b0a4b9;margin:12px 0 0}.receipt{background:#faf8fd;border:1px solid #eee8f6;border-radius:14px;padding:16px;text-align:left;margin:20px 0}.receipt h3{margin:0 0 10px;color:#8c7ba1;font-size:10px;letter-spacing:.1em}.receipt-row{display:flex;justify-content:space-between;padding:6px 0;font-size:11px;color:#9d90ac}.receipt-row b{color:#635470;font-variant-numeric:tabular-nums;font-weight:650}.receipt-total{display:flex;justify-content:space-between;border-top:1px dashed #dcd2e7;margin-top:11px;padding-top:13px;color:#78658c;font-size:11px;align-items:center}.receipt-total b{font-size:24px;color:var(--purple-dark)}.help-modal{text-align:left}.help-modal h2{font-size:21px}.help-modal p{color:#8b7e96;font-size:12px;line-height:2}.help-modal kbd{background:#f3eff9;border-radius:4px;padding:2px 5px;color:#736282}.help-modal .key-list{font-size:11px;color:#9a8aa8;line-height:2.2}.engine-on .brand-mark{box-shadow:0 0 0 4px #e5ddf7}.toast{font-size:11px;color:#887399;min-height:19px;margin-top:13px;padding-left:2px}.trip-progress{height:3px;background:#ede7f6}.trip-progress>div{height:100%;width:0;background:#ae9bd7;transition:width 1s}.controls{position:relative}.stage-tag{color:#a796bc;font-size:9px;font-weight:500;letter-spacing:.06em}
+@media(min-width:1000px){.scene{height:332px}.control{min-height:78px}.side .drive-card{flex:1}.drive-card .pedals{margin-top:15px}}
+@media(max-width:850px){.app{padding:19px 22px}.layout{grid-template-columns:minmax(0,1fr) 258px;gap:14px}.route-card,.drive-card{padding:17px}.scene{height:298px}.control-grid{grid-template-columns:repeat(3,1fr)}.control{min-height:65px}.trip-label{display:none}.control-label{font-size:10px}.segment{padding:5px 11px}.instrument{padding:0 15px}}
+@media(max-width:640px){.app{padding:17px 15px 20px}.topbar{padding-bottom:17px}.intro{padding:18px 1px}.intro h1{font-size:25px}.intro p{font-size:11px}.layout{display:flex;flex-direction:column;gap:13px}.side{display:contents}.route-card{order:0;padding:13px 16px}.route-card .route-top{display:none}.route-list{display:flex;justify-content:space-between;gap:5px}.route-item{gap:6px;padding-bottom:0;align-items:center}.route-item:not(:last-child):before{display:none}.route-num{width:22px;height:22px;font-size:9px;border-radius:7px}.route-text{font-size:9px;white-space:nowrap}.route-full{display:none}.route-short{display:inline}.route-text small{display:none}.main{display:contents}.scene-card{order:1}.scene-top{padding:12px 16px}.scene{height:263px}.instrument{padding:0 17px}.instruments{padding:13px 0}.speed-number,.gear-value{font-size:25px}.controls{order:3;padding:17px;margin:0}.control-grid{grid-template-columns:repeat(3,1fr);gap:7px}.control{min-height:70px;padding:10px 4px}.card-heading{margin-bottom:12px}.drive-card{order:2;padding:17px}.drive-card h2{display:inline}.drive-card>p{display:inline;margin-left:8px}.steer-buttons{margin-top:13px;gap:8px}.steer{padding:10px;flex-direction:row;justify-content:center;gap:7px}.pedals{margin-top:9px}.pedal{min-height:52px}.exit-actions{margin-top:9px}.status-card{order:4;padding:13px 16px}.foot{font-size:8px;margin-top:17px}.foot span:first-child{max-width:64%}.scene-caption{left:15px;font-size:10px}.moto-notice{font-size:10px}.modal{padding:25px 23px}.route-item:nth-child(5) .route-text{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<svg style="display:none" aria-hidden="true"><defs>
+<symbol id="i-car" viewBox="0 0 24 24"><path d="m5 7 2-4h10l2 4 2 3v8H3v-8zM3 10h18M7 18v3m10-3v3M6 14h2m8 0h2M5 7h14"/></symbol>
+<symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 2-2.5 2-2.5 4m0 3h.01"/></symbol>
+<symbol id="i-fuel" viewBox="0 0 24 24"><path d="M3 21h12M5 21V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v17M5 11h8m0 3h3v4a2 2 0 0 0 4 0V9l-3-3m3 3h-3V6"/><path d="M8 6h2v2H8z"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-belt" viewBox="0 0 24 24"><path d="M6 3v6m12-6v6M5 21l2-7h10l2 7M5 17 19 7M9 10h6v4"/><circle cx="12" cy="5" r="2"/></symbol>
+<symbol id="i-power" viewBox="0 0 24 24"><path d="M12 2v10m-5-8a9 9 0 1 0 10 0"/></symbol>
+<symbol id="i-hand" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M2.5 5a12 12 0 0 0 0 14m19-14a12 12 0 0 1 0 14M10 16V8h3a2 2 0 0 1 0 4h-3"/></symbol>
+<symbol id="i-brake" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M2.5 5a12 12 0 0 0 0 14m19-14a12 12 0 0 1 0 14M12 8v5m0 3h.01"/></symbol>
+<symbol id="i-left" viewBox="0 0 24 24"><path d="m8 4-5 5 5 5M3 9h10a6 6 0 0 1 6 6v6"/></symbol>
+<symbol id="i-right" viewBox="0 0 24 24"><path d="m16 4 5 5-5 5m5-5H11a6 6 0 0 0-6 6v6"/></symbol>
+<symbol id="i-up" viewBox="0 0 24 24"><path d="m6 9 6-6 6 6m-6-6v19"/></symbol>
+<symbol id="i-gear" viewBox="0 0 24 24"><path d="M6 4v16m12-16v8H6m6-8v16"/><circle cx="6" cy="3" r="1"/><circle cx="12" cy="3" r="1"/><circle cx="18" cy="3" r="1"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 0 1 14 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="3"/><path d="M8 10V6a4 4 0 0 1 8 0v4m-4 5v2"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 5 5L20 6"/></symbol>
+<symbol id="i-alert" viewBox="0 0 24 24"><path d="m12 3 10 18H2L12 3Z"/><path d="M12 9v5m0 3h.01"/></symbol>
+<symbol id="i-route" viewBox="0 0 24 24"><circle cx="5" cy="5" r="2"/><circle cx="19" cy="19" r="2"/><path d="M7 5h9a4 4 0 0 1 0 8H8a4 4 0 0 0 0 8h3"/></symbol>
+<symbol id="i-pedal" viewBox="0 0 24 24"><rect x="8" y="3" width="9" height="16" rx="3" transform="rotate(12 12 12)"/><path d="m11 7 3 1m-4 3 3 1m-4 3 3 1M10 20v2"/></symbol>
+</defs></svg>
+<div class="app" id="app">
+ <header class="topbar"><div class="brand"><span class="brand-mark"><svg class="icon"><use href="#i-car"/></svg></span><div>開車模擬器<small>A LITTLE DRIVE, A LITTLE LESSON.</small></div></div><button class="help-button" id="helpBtn"><svg class="icon"><use href="#i-help"/></svg>遊戲說明</button></header>
+ <div class="intro"><div><div class="eyebrow">LET'S TAKE A LITTLE DRIVE</div><h1>慢慢開，平安到。</h1><p>一段城市小旅行。從上車準備，到好好說再見。</p></div><div class="trip-label"><span class="dot"></span>城市練習路線 · 3 個路口</div></div>
+ <div class="layout">
+  <main class="main">
+   <section class="card scene-card" aria-label="行車畫面">
+    <div class="scene-top"><div class="scene-title"><span class="dot"></span><span id="stageTitle">準備好就出發。</span></div><span class="pill" id="stagePill">上車準備</span></div>
+    <div class="scene"><canvas id="roadCanvas" role="img" aria-label="城市道路與目前行車情境"></canvas><div class="scene-caption"><svg class="icon"><use href="#i-route"/></svg><span id="sceneCaption">今天的目的地：河畔停車場</span></div><div class="traffic" id="traffic" hidden role="img" aria-label="交通號誌"><span class="lamp red" id="redLamp"></span><span class="lamp green" id="greenLamp"></span></div><div class="road-sign" id="lightLabel" hidden></div><div class="moto-notice" id="motoNotice" hidden aria-live="polite"></div><div class="scene-bottom"><span class="location"><svg class="icon"><use href="#i-pin"/></svg><span id="locationText">小城・出發點</span></span><span id="roadHint">YOUR JOURNEY STARTS HERE</span></div></div>
+    <div class="trip-progress" aria-hidden="true"><div id="progressBar"></div></div>
+    <div class="instruments"><div class="instrument"><div class="label">目前車速</div><div class="speed-number"><span id="speedValue">0</span><small>km/h</small></div></div><div class="instrument"><div class="label">目前檔位</div><div class="gear-value" id="gearValue">P</div></div><div class="instrument"><div class="label">油量 <span id="fuelIcon">⛽</span></div><div class="fuel-bars" id="fuelBars" aria-label="油量尚未檢查"></div><div class="fuel-state" id="fuelState">尚未檢查</div></div></div>
+   </section>
+   <section class="card controls" aria-label="車輛操作"><div class="card-heading"><h2><svg class="icon"><use href="#i-car"/></svg>你的駕駛座</h2><span>操作後，留意車況變化</span></div>
+    <div class="control-grid">
+     <button class="control" id="checkFuelBtn" data-action="checkFuel"><svg class="icon"><use href="#i-eye"/></svg><span>檢查油量</span><span class="mini-status" id="checkFuelState">點擊查看</span></button>
+     <button class="control" id="refuelBtn" data-action="refuel"><svg class="icon"><use href="#i-fuel"/></svg><span>加油</span><span class="mini-status">補滿油箱</span></button>
+     <button class="control" id="beltBtn" data-action="belt" aria-pressed="false"><svg class="icon"><use href="#i-belt"/></svg><span>安全帶</span><span class="mini-status" id="beltState">未繫上</span></button>
+     <button class="control" id="engineBtn" data-action="engine" aria-pressed="false"><svg class="icon"><use href="#i-power"/></svg><span id="engineText">啟動引擎</span><span class="mini-status" id="engineState">已熄火</span></button>
+     <button class="control" id="handbrakeBtn" data-action="handbrake" aria-pressed="true"><svg class="icon"><use href="#i-hand"/></svg><span>手煞車</span><span class="mini-status" id="handbrakeState">已拉起</span></button>
+     <button class="control" id="brakeControlBtn" data-action="brake" aria-pressed="false"><svg class="icon"><use href="#i-brake"/></svg><span>煞車踏板</span><span class="mini-status" id="brakeState">已放開</span></button>
+    </div>
+    <div class="gear-control"><span class="control-label"><svg class="icon"><use href="#i-gear"/></svg>排檔桿</span><div class="segments" role="group" aria-label="選擇檔位"><button class="segment active" data-action="gearP" id="gearPBtn" aria-pressed="true">P</button><button class="segment" data-action="gearD" id="gearDBtn" aria-pressed="false">D</button></div></div>
+   </section>
+  </main>
+  <aside class="side">
+   <section class="card route-card" aria-label="行程路線"><div class="route-top"><h2>這一趟的路線</h2><span>THE ROUTE</span></div><ol class="route-list" id="routeList"><li class="route-item current"><span class="route-num">○</span><div class="route-text"><span class="route-full">上車準備</span><span class="route-short">準備</span><small>出發前的小事</small></div></li><li class="route-item"><span class="route-num">01</span><div class="route-text"><span class="route-full">日光路口 · 直行</span><span class="route-short">直行</span><small>穿過城市的早晨</small></div></li><li class="route-item"><span class="route-num">02</span><div class="route-text"><span class="route-full">花園路口 · 右轉</span><span class="route-short">右轉</span><small>轉進綠意的小路</small></div></li><li class="route-item"><span class="route-num">03</span><div class="route-text"><span class="route-full">河畔路口 · 左轉</span><span class="route-short">左轉</span><small>目的地就在前方</small></div></li><li class="route-item"><span class="route-num">P</span><div class="route-text"><span class="route-full">停車與離開</span><span class="route-short">停車</span><small>替旅程畫上句點</small></div></li></ol></section>
+   <section class="card drive-card"><h2>掌握你的方向</h2><p id="driveDescription">觀察周圍，再決定下一步。</p><div class="steer-buttons"><button class="steer" id="turnLeftBtn" data-action="turnLeft"><svg class="icon"><use href="#i-left"/></svg>左轉</button><button class="steer" id="straightBtn" data-action="straight"><svg class="icon"><use href="#i-up"/></svg>直行</button><button class="steer" id="turnRightBtn" data-action="turnRight"><svg class="icon"><use href="#i-right"/></svg>右轉</button></div><div class="signals"><span class="control-label">方向燈</span><div class="segments" role="group" aria-label="方向燈"><button class="segment" id="signalLeftBtn" data-action="signalLeft" aria-label="左方向燈" aria-pressed="false"><svg class="icon"><use href="#i-left"/></svg></button><button class="segment active" id="signalOffBtn" data-action="signalOff" aria-pressed="true">關</button><button class="segment" id="signalRightBtn" data-action="signalRight" aria-label="右方向燈" aria-pressed="false"><svg class="icon"><use href="#i-right"/></svg></button></div></div><div class="pedals"><button class="pedal brake" id="brakeBtn" data-action="brake" aria-pressed="false"><svg class="icon"><use href="#i-brake"/></svg><span id="brakeBtnText">踩煞車</span></button><button class="pedal gas" id="gasBtn" data-action="gas"><svg class="icon"><use href="#i-pedal"/></svg>踩油門</button></div><div class="exit-actions"><button class="exit-action" id="exitBtn" data-action="exit">下車</button><button class="exit-action" id="lockBtn" data-action="lock">鎖車</button><button class="exit-action" id="leaveBtn" data-action="leave">離開</button></div><div class="toast" id="feedback" role="status" aria-live="polite">車門關上了，旅程即將開始。</div></section>
+   <div class="status-card" id="statusCard"><svg class="icon"><use href="#i-help"/></svg><p id="statusText"><strong>每一趟，都學會一點。</strong><br>路上的每個決定都有結果。成功完成一趟後，就能看見這一路的累積紀錄。</p></div>
+  </aside>
+ </div>
+ <footer class="foot"><span><svg class="icon"><use href="#i-lock"/></svg>紀錄只保留在這個瀏覽器</span><span>DRIVE SLOW. ARRIVE HAPPY.</span></footer>
+</div>
+<div class="overlay" id="resultOverlay" hidden><section class="modal" id="resultModal" role="dialog" aria-modal="true" aria-labelledby="resultTitle" aria-describedby="resultMessage"><div class="result-mark" id="resultMark"></div><div class="eyebrow" id="resultEyebrow">A LESSON FOR THE NEXT DRIVE</div><h2 id="resultTitle">這一趟，先到這裡。</h2><p class="result-message" id="resultMessage"></p><div id="receipt" hidden></div><button class="primary" id="restartBtn">重新開始</button><p class="result-note" id="resultNote">再試一次，這次會更好。</p></section></div>
+<div class="overlay" id="helpOverlay" hidden><section class="modal help-modal" role="dialog" aria-modal="true" aria-labelledby="helpTitle"><div class="eyebrow">WELCOME ABOARD</div><h2 id="helpTitle">一趟小旅行，自己來試試。</h2><p>從上車準備開始，依路線通過三個路口，最後停車、下車並離開。觀察車況、交通號誌，以及你身旁的動靜，再決定怎麼做。</p><p>按一下煞車會持續踩住，再按一下放開。方向燈與車輛開關同樣是點一下切換；踩油門會起步，或沿目前路線通過路口。路口號誌會隨時間變換。</p><p>操作失誤可能讓這一趟提早結束。重新開始後可再試一次，直到成功完成行程，才會公布累積紀錄。</p><div class="key-list">也可以用鍵盤：<kbd>↑</kbd> 油門　<kbd>Space</kbd> 煞車<br><kbd>←</kbd> 左轉　<kbd>→</kbd> 右轉　<kbd>Esc</kbd> 關閉說明<br>轉彎方向燈請使用畫面按鈕操作。</div><button class="primary" id="closeHelpBtn" style="margin-top:20px">回到駕駛座</button></section></div>
+<script>
+'use strict';
+// 遊戲金額可在此調整；全部為遊戲設定，不代表現實費率。
+const CONFIG = Object.freeze({ fuelCapacity: 8, minimumFuel: 3, fuelPerCell: 180, redFine: 2700, repairFee: 18000, settlementFee: 36000, redCrashChance: 0.30, travelMs: 1500, redMs: 5200, greenMs: 7000, yieldMs: 2200 });
+const STORAGE_KEY = 'little-drive-records-v1';
+const ROUTE = Object.freeze([{name:'日光路口',action:'straight',label:'直行'},{name:'花園路口',action:'right',label:'右轉'},{name:'河畔路口',action:'left',label:'左轉'}]);
+const $ = id => document.getElementById(id);
+const money = n => '$' + n.toLocaleString('zh-TW');
+const icon = name => '<svg class="icon" aria-hidden="true"><use href="#i-'+name+'"/></svg>';
+const emptyStats = () => ({restarts:0,fuelCost:0,redLights:0,fines:0,crashes:0,repairs:0,settlements:0,thefts:0});
+function readStats(){try{const raw=JSON.parse(localStorage.getItem(STORAGE_KEY));const clean=emptyStats();if(raw&&typeof raw==='object'){for(const key of Object.keys(clean)){if(Number.isSafeInteger(raw[key])&&raw[key]>=0)clean[key]=raw[key];}}return clean;}catch{return emptyStats();}}
+let stats = readStats();
+let state;
+let lightDeadline=0, travelTimer=null, yieldTimer=null, lightTimer=null;
+let animationFrame=0, lastTime=0, roadOffset=0;
+let storageAvailable=true;
+const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function saveStats(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(stats));}catch{storageAvailable=false;}}
+function clearTimers(){clearTimeout(travelTimer);clearTimeout(yieldTimer);clearInterval(lightTimer);travelTimer=yieldTimer=lightTimer=null;lightDeadline=0;}
+function feedback(text){$('feedback').textContent=text;}
+function startRound(clearRecords=false){
+ clearTimers();if(clearRecords)stats=emptyStats();saveStats();
+ state={phase:'prepare',fuel:1+Math.floor(Math.random()*CONFIG.fuelCapacity),fuelChecked:false,refueled:false,engine:false,gear:'P',handbrake:true,brake:false,belt:false,signal:'off',speed:0,index:-1,light:'red',moto:'absent',resolved:false,crashRecorded:false,lastAction:'',endReason:''};
+ $('resultOverlay').hidden=true;$('helpOverlay').hidden=true;$('receipt').hidden=true;$('receipt').innerHTML='';feedback('車門關上了，旅程即將開始。');render();
+}
+function restart(){if(state.phase!=='failed'&&state.phase!=='success')return;if(state.phase==='success'){startRound(true);}else{stats.restarts++;saveStats();startRound();}$('gasBtn').focus();}
+function recordCrash(){if(state.crashRecorded)return;state.crashRecorded=true;stats.crashes++;stats.repairs+=CONFIG.repairFee;stats.settlements+=CONFIG.settlementFee;}
+function fail(reason,accident=false){if(state.phase==='failed'||state.phase==='success')return;if(accident)recordCrash();state.endReason=reason;state.phase='failed';state.speed=0;clearTimers();saveStats();render();showResult(false,reason);}
+function showResult(success,message){
+ const modal=$('resultModal');modal.classList.toggle('success',success);$('resultMark').innerHTML=icon(success?'check':'alert');$('resultEyebrow').textContent=success?'YOU MADE IT. NICE DRIVING!':'A LESSON FOR THE NEXT DRIVE';$('resultTitle').textContent=success?'終於，平安抵達。':'這一趟，先到這裡。';$('resultMessage').textContent=message;$('restartBtn').textContent=success?'重新挑戰':'重新開始';$('resultNote').textContent=success?'重新挑戰會清空紀錄，開始新一輪旅程。':'重新開始後，累積紀錄會繼續保留。';$('receipt').hidden=!success;
+ if(success){const rows=[['重開次數',stats.restarts+' 次'],['加油總費用',money(stats.fuelCost)],['闖紅燈次數',stats.redLights+' 次'],['罰單總費用',money(stats.fines)],['車禍次數',stats.crashes+' 次'],['車禍維修總費用',money(stats.repairs)],['賠償和解總費用',money(stats.settlements)],['被偷車次數',stats.thefts+' 次']];const total=stats.fuelCost+stats.fines+stats.repairs+stats.settlements;$('receipt').className='receipt';$('receipt').innerHTML='<h3>這一路的累積紀錄 / TRIP RECEIPT</h3>'+rows.map(([k,v])=>'<div class="receipt-row"><span>'+k+'</span><b>'+v+'</b></div>').join('')+'<div class="receipt-total"><span>遊戲費用合計</span><b>'+money(total)+'</b></div><div class="result-note">以上皆為遊戲設定金額。</div>';}
+ else{$('receipt').innerHTML='';}
+ $('resultOverlay').hidden=false;$('helpOverlay').hidden=true;$('restartBtn').focus();
+}
+function requirements(){const missing=[];if(!state.engine)missing.push('啟動引擎');if(state.gear!=='D')missing.push('換檔');if(state.handbrake)missing.push('放開手煞車');return missing;}
+function gas(){
+ if(state.phase==='prepare'){
+  const missing=requirements();if(missing.length){fail('起步失敗，你忘了'+missing.join('／')+'。');return;}
+  if(state.brake){feedback('煞車仍然踩著，車子沒有前進。');return;}
+  if(state.fuel<=CONFIG.minimumFuel&&!state.refueled){fail('上路失敗，你的車開到一半沒油了。');return;}
+  state.speed=32;feedback('引擎輕輕響起，出發了。');travelTo(0);return;
+ }
+ if(state.phase==='junction'){cross(ROUTE[state.index].action);return;}
+ if(state.phase==='parking'){if(!state.engine||state.gear!=='D'||state.handbrake||state.brake){feedback('車輛目前沒有前進。');return;}state.speed=12;feedback('車子緩緩向前移動。');render();}
+}
+function travelTo(index){
+ clearTimers();state.phase='travel';state.index=index;state.resolved=false;state.moto='absent';state.brake=false;state.speed=32;render();
+ travelTimer=setTimeout(()=>{if(state.phase!=='travel')return;if(index>=ROUTE.length){state.phase='parking';state.speed=12;feedback('已抵達河畔停車場。這一趟旅程就快完成了。');render();return;}enterJunction(index);},CONFIG.travelMs);
+}
+function enterJunction(index){
+ state.phase='junction';state.index=index;state.resolved=false;state.crashRecorded=false;state.speed=state.brake?0:25;state.light=Math.random()<.5?'red':'green';state.moto=index===1?'waiting':'absent';lightDeadline=Date.now()+(state.light==='red'?CONFIG.redMs:CONFIG.greenMs);
+ feedback('前方是'+ROUTE[index].name+'，本段路線'+ROUTE[index].label+'。');lightTimer=setInterval(updateLight,200);render();if(state.brake)beginYield();
+}
+function updateLight(){if(state.phase!=='junction')return;if(Date.now()>=lightDeadline){state.light=state.light==='red'?'green':'red';lightDeadline=Date.now()+(state.light==='red'?CONFIG.redMs:CONFIG.greenMs);renderLight();}}
+function beginYield(){
+ if(state.phase!=='junction'||state.moto!=='waiting'||!state.brake||state.speed!==0)return;
+ clearTimeout(yieldTimer);state.moto='passing';feedback('你停了下來，機車正從內側通過。');render();
+ yieldTimer=setTimeout(()=>{if(state.phase==='junction'&&state.brake&&state.speed===0&&state.moto==='passing'){state.moto='cleared';feedback('機車已經先行通過。');render();}},CONFIG.yieldMs);
+}
+function toggleBrake(){
+ if(!['prepare','travel','junction','parking'].includes(state.phase))return;
+ state.brake=!state.brake;if(state.brake){state.speed=0;feedback('已踩住煞車，車輛停穩。');if(state.phase==='travel'){clearTimeout(travelTimer);travelTimer=null;}}
+ else{feedback('已放開煞車。');if(state.moto==='passing'){clearTimeout(yieldTimer);state.moto='waiting';}if(state.phase==='travel'){state.speed=25;const next=state.index;travelTimer=setTimeout(()=>{if(state.phase==='travel'){if(next>=ROUTE.length){state.phase='parking';state.speed=12;feedback('已抵達河畔停車場。');render();}else enterJunction(next);}},CONFIG.travelMs);}}
+ render();beginYield();
+}
+function cross(action){
+ if(state.phase!=='junction'||state.resolved)return;
+ const route=ROUTE[state.index];if(action!==route.action){feedback('這一段的目的地在'+route.label+'方向。');return;}
+ if(state.brake){feedback('煞車仍然踩著，車子沒有前進。');return;}
+ if(!state.engine||state.gear!=='D'||state.handbrake){feedback('車輛目前無法前進，請留意車況。');return;}
+ updateLight();state.resolved=true;
+ let redCrash=false;if(state.light==='red'){stats.redLights++;stats.fines+=CONFIG.redFine;redCrash=Math.random()<CONFIG.redCrashChance;}
+ if(action!=='straight'&&state.signal!==action){fail('開車失敗，你撞到了旁邊的直行車。',true);return;}
+ if(action!=='straight'&&(state.moto==='waiting'||state.moto==='passing')){fail('開車失敗，你沒有禮讓機車，發生了碰撞。',true);return;}
+ if(redCrash){fail('開車失敗，你闖紅燈發生了車禍。',true);return;}
+ saveStats();const wasRed=state.light==='red';state.signal='off';feedback(wasRed?'你通過了路口，這次沒有發生碰撞。':'順利通過'+route.name+'。');travelTo(state.index+1);
+}
+function exitCar(){
+ if(state.phase!=='parking')return;const missing=[];if(state.speed!==0)missing.push('踩煞車停穩');if(!state.handbrake)missing.push('拉手煞車');if(state.gear!=='P')missing.push('切換 P 檔');if(state.engine)missing.push('熄火');if(missing.length){fail('停車失敗，你忘了'+missing.join('／')+'。');return;}state.phase='outside';feedback('你下了車，河邊的風很舒服。');render();$('lockBtn').focus();
+}
+function leave(){if(state.phase!=='outside'&&state.phase!=='locked')return;if(state.phase!=='locked'){stats.thefts++;fail('你的車被偷走了。');return;}clearTimers();state.phase='success';saveStats();render();showResult(true,'恭喜，你終於成功開完一趟！');}
+function act(action){
+ if(['failed','success'].includes(state.phase))return;
+ if(action==='gas'){gas();return;}if(action==='brake'){toggleBrake();return;}if(action==='turnLeft'){cross('left');return;}if(action==='turnRight'){cross('right');return;}if(action==='straight'){cross('straight');return;}if(action==='exit'){exitCar();return;}if(action==='leave'){leave();return;}
+ if(action==='lock'){if(state.phase==='outside'||state.phase==='locked'){state.phase=state.phase==='locked'?'outside':'locked';feedback(state.phase==='locked'?'喀噠，車門已經鎖好了。':'車門已解鎖。');render();}return;}
+ if(['outside','locked'].includes(state.phase))return;
+ if(action==='checkFuel'){state.fuelChecked=true;feedback('你查看了油表。');}
+ if(action==='refuel'){if(state.phase!=='prepare')return;const cells=CONFIG.fuelCapacity-state.fuel;if(cells){stats.fuelCost+=cells*CONFIG.fuelPerCell;state.fuel=CONFIG.fuelCapacity;state.refueled=true;saveStats();feedback('油箱已補滿。');}else feedback('油箱已經是滿的。');}
+ if(action==='belt'){state.belt=!state.belt;feedback(state.belt?'已繫上安全帶。':'已解開安全帶。');}
+ if(action==='engine'){if(state.phase==='travel'||state.phase==='junction'){feedback('請抵達停車場後再熄火。');return;}state.engine=!state.engine;feedback(state.engine?'引擎啟動了。':'引擎已熄火。');}
+ if(action==='handbrake'){if(state.phase==='travel'){feedback('請使用煞車踏板減速停車。');return;}state.handbrake=!state.handbrake;feedback(state.handbrake?'已拉起手煞車。':'已放開手煞車。');}
+ if(action==='gearP'||action==='gearD'){if(state.phase==='travel'){feedback('車輛正在行駛中。');return;}state.gear=action==='gearP'?'P':'D';feedback('已切換至 '+state.gear+' 檔。');}
+ if(action==='signalLeft'||action==='signalRight'||action==='signalOff'){state.signal=action==='signalLeft'?'left':action==='signalRight'?'right':'off';feedback(state.signal==='off'?'方向燈已關閉。':state.signal==='left'?'已打左方向燈。':'已打右方向燈。');}
+ render();
+}
+function setActive(id,value){$(id).classList.toggle('active',value);$(id).setAttribute('aria-pressed',String(value));}
+function renderLight(){const visible=state.phase==='junction';$('traffic').hidden=!visible;$('lightLabel').hidden=!visible;$('redLamp').classList.toggle('on',state.light==='red');$('greenLamp').classList.toggle('on',state.light==='green');$('lightLabel').textContent=state.light==='red'?'目前號誌：紅燈':'目前號誌：綠燈';$('traffic').setAttribute('aria-label',state.light==='red'?'紅燈':'綠燈');}
+function render(){
+ const phase=state.phase,ended=['failed','success'].includes(phase),outside=['outside','locked'].includes(phase),inside=!ended&&!outside;
+ $('app').classList.toggle('engine-on',state.engine&&!ended);$('speedValue').textContent=state.speed;$('gearValue').textContent=state.gear;
+ $('fuelBars').innerHTML=Array.from({length:CONFIG.fuelCapacity},(_,i)=>'<span class="fuel-cell '+(!state.fuelChecked?'unknown':i<state.fuel?'filled':'')+'"></span>').join('');$('fuelBars').setAttribute('aria-label',state.fuelChecked?'油量 '+state.fuel+' 格':'油量尚未檢查');$('fuelState').textContent=state.fuelChecked?state.fuel+' / '+CONFIG.fuelCapacity+' 格':'尚未檢查';$('checkFuelState').textContent=state.fuelChecked?'已查看':'點擊查看';
+ setActive('beltBtn',state.belt);setActive('engineBtn',state.engine);setActive('handbrakeBtn',state.handbrake);setActive('brakeControlBtn',state.brake);setActive('brakeBtn',state.brake);setActive('gearPBtn',state.gear==='P');setActive('gearDBtn',state.gear==='D');setActive('signalLeftBtn',state.signal==='left');setActive('signalRightBtn',state.signal==='right');setActive('signalOffBtn',state.signal==='off');
+ $('beltState').textContent=state.belt?'已繫上':'未繫上';$('engineText').textContent=state.engine?'熄火':'啟動引擎';$('engineState').textContent=state.engine?'運轉中':'已熄火';$('handbrakeState').textContent=state.handbrake?'已拉起':'已放開';$('brakeState').textContent=state.brake?'踩住中':'已放開';$('brakeBtnText').textContent=state.brake?'放開煞車':'踩煞車';
+ document.querySelectorAll('[data-action]').forEach(btn=>{btn.disabled=ended;});
+ for(const id of ['checkFuelBtn','beltBtn','engineBtn','handbrakeBtn','brakeControlBtn','gearPBtn','gearDBtn','signalLeftBtn','signalOffBtn','signalRightBtn','brakeBtn'])$(id).disabled=!inside;
+ $('refuelBtn').disabled=phase!=='prepare';$('engineBtn').disabled=!inside||['travel','junction'].includes(phase);$('handbrakeBtn').disabled=!inside||phase==='travel';$('gearPBtn').disabled=!inside||phase==='travel';$('gearDBtn').disabled=!inside||phase==='travel';
+ $('gasBtn').disabled=!['prepare','junction','parking'].includes(phase);for(const id of ['turnLeftBtn','straightBtn','turnRightBtn'])$(id).disabled=phase!=='junction';$('exitBtn').disabled=phase!=='parking';$('lockBtn').disabled=!outside;$('leaveBtn').disabled=!outside;$('lockBtn').textContent=phase==='locked'?'已鎖車':'鎖車';setActive('lockBtn',phase==='locked');
+ let title='準備好就出發。',pill='上車準備',caption='今天的目的地：河畔停車場',location='小城・出發點',hint='YOUR JOURNEY STARTS HERE';
+ if(phase==='travel'){title='窗外的風景，慢慢向後。';pill='行駛中';caption=state.index<3?'前往'+ROUTE[state.index].name:'前往河畔停車場';location='小城・沿途街景';hint='ENJOY THE LITTLE THINGS';}
+ if(phase==='junction'){const route=ROUTE[state.index];title=route.name+'，'+route.label+'。';pill='路口 '+(state.index+1)+' / 3';caption='本段路線：'+route.label;location='小城・'+route.name;hint='LOOK AROUND. TAKE YOUR TIME.';}
+ if(phase==='parking'){title='到站了，好好停下來。';pill='停車';caption='已抵達：河畔停車場';location='河畔・停車場';hint='A GOOD ENDING MATTERS';}
+ if(outside){title=phase==='locked'?'車鎖好了，帶著好心情離開。':'下車後，還有最後一件小事。';pill='下車離開';caption='河畔停車場・車外';location='河畔・停車場';hint='ALMOST THERE';}
+ if(ended){title=phase==='success'?'旅程完成。':'旅程已結束。';pill=phase==='success'?'成功抵達':'這次失敗';}
+ $('stageTitle').textContent=title;$('stagePill').textContent=pill;$('sceneCaption').textContent=caption;$('locationText').textContent=location;$('roadHint').textContent=hint;
+ $('driveDescription').textContent=phase==='junction'?'本段路線：'+ROUTE[state.index].label:'觀察周圍，再決定下一步。';
+ const routeProgress=phase==='prepare'?0:state.index>=3?4:Math.max(1,state.index+1);document.querySelectorAll('.route-item').forEach((item,i)=>{item.classList.toggle('current',i===routeProgress);item.classList.toggle('done',i<routeProgress);});$('progressBar').style.width=(phase==='success'?100:Math.min(90,routeProgress*22))+'%';
+ renderLight();const motoVisible=phase==='junction'&&['waiting','passing','cleared'].includes(state.moto);$('motoNotice').hidden=!motoVisible;$('motoNotice').textContent=state.moto==='passing'?'機車正在從內側通過…':state.moto==='cleared'?'機車已通過':'留意：內側有機車接近';
+ if(!storageAvailable){document.querySelector('.foot span').textContent='此瀏覽器未開放儲存；紀錄保留至本頁關閉。';}
+ drawScene();
+}
+// 純 Canvas 繪圖：無外部圖片、字型、套件或網路依賴。
+const canvas=$('roadCanvas'),ctx=canvas.getContext('2d');
+function shape(points,color){ctx.fillStyle=color;ctx.beginPath();points.forEach((p,i)=>i?ctx.lineTo(...p):ctx.moveTo(...p));ctx.closePath();ctx.fill();}
+function rect(x,y,w,h,color){ctx.fillStyle=color;ctx.fillRect(x,y,w,h);}
+function circle(x,y,r,color){ctx.fillStyle=color;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fill();}
+function tree(x,y,s){rect(x-2*s,y,4*s,30*s,'#a29b91');circle(x,y-7*s,22*s,'#91b6a0');circle(x-12*s,y+2*s,14*s,'#a2c0aa');circle(x+10*s,y-13*s,13*s,'#a9c5ad');}
+function building(x,y,w,h,body,roof){rect(x,y,w,h,body);shape([[x-4,y],[x+w+4,y],[x+w-2,y-9],[x+3,y-9]],roof);for(let i=10;i<w-7;i+=18){for(let j=12;j<h-7;j+=24){rect(x+i,y+j,9,13,'#fff5ed99');rect(x+i,y+j,3,13,'#e4dce880');}}}
+function drawScene(){
+ if(!state||!ctx)return;const box=canvas.getBoundingClientRect();const dpr=Math.min(window.devicePixelRatio||1,2);if(canvas.width!==Math.round(box.width*dpr)||canvas.height!==Math.round(box.height*dpr)){canvas.width=Math.round(box.width*dpr);canvas.height=Math.round(box.height*dpr);}ctx.setTransform(canvas.width/760,0,0,canvas.height/350,0,0);ctx.clearRect(0,0,760,350);
+ const sky=ctx.createLinearGradient(0,0,0,350);sky.addColorStop(0,'#e5e4f3');sky.addColorStop(.65,'#f3e7e4');sky.addColorStop(1,'#f6eee7');rect(0,0,760,350,sky);circle(559,83,29,'#f9f2db');circle(559,83,43,'#fff6df29');
+ shape([[0,145],[65,106],[140,140],[205,102],[310,144],[420,115],[550,147],[660,103],[760,142],[760,210],[0,210]],'#d9d8e3');
+ rect(0,164,760,110,'#c8d2c5');building(23,116,69,81,'#d9c4be','#beb0bc');building(102,94,55,103,'#d4cbdc','#b9afc6');building(171,136,72,56,'#e7d5c5','#c8b6b7');building(269,132,39,60,'#d4c6d7','#bbaec7');building(510,124,48,73,'#d3cbdc','#b9b0c8');building(571,108,68,94,'#e1d0c7','#bfb0b7');building(658,131,75,75,'#d5c6d5','#bbaec2');
+ rect(166,173,84,20,'#c4aebd');rect(172,175,72,9,'#f5eae0');ctx.font='8px sans-serif';ctx.fillStyle='#aa8c9b';ctx.fillText('LITTLE CAFE',180,182);
+ shape([[0,219],[328,184],[431,184],[760,219],[760,350],[0,350]],'#c1ccbb');
+ shape([[0,273],[326,190],[434,190],[760,272],[760,350],[0,350]],'#ddd6d2');
+ const parking=['parking','outside','locked','success'].includes(state.phase);
+ shape([[328,190],[432,190],[620,350],[138,350]],parking?'#888994':'#868392');
+ shape([[324,190],[328,190],[138,350],[123,350]],'#f5eee6');shape([[432,190],[436,190],[636,350],[620,350]],'#f5eee6');
+ if(state.phase==='junction'){
+  shape([[0,223],[760,223],[760,254],[0,254]],'#908b99');shape([[0,217],[310,217],[300,221],[0,223]],'#ece4df');shape([[449,217],[760,217],[760,223],[461,221]],'#ece4df');
+  for(let i=0;i<7;i++){let x=285+i*27;shape([[x,266],[x+17,266],[x+23,279],[x-6,279]],'#e7dfdb');}
+  shape([[251,292],[508,292],[512,296],[247,296]],'#eee6e1');
+ }
+ if(parking){ctx.strokeStyle='#e2dfe4';ctx.lineWidth=3;for(let i=0;i<3;i++){ctx.beginPath();ctx.moveTo(245+i*97,254);ctx.lineTo(185+i*133,342);ctx.stroke();}ctx.font='bold 30px sans-serif';ctx.fillStyle='#dbd3e2';ctx.fillText('P',365,296);}
+ else{for(let i=0;i<5;i++){const z=((i/5+roadOffset)%1);const y=198+z*z*165,w=1.4+z*5,h=2+z*21;shape([[380-w,y],[380+w,y],[380+w*1.4,y+h],[380-w*1.4,y+h]],'#e8ded8');}}
+ tree(49,223,1.1);tree(144,208,.74);tree(280,187,.45);tree(479,190,.5);tree(608,220,.94);tree(721,251,1.32);
+ rect(220,184,2,32,'#a99da8');rect(213,179,16,15,'#cbbbdc');ctx.font='9px sans-serif';ctx.fillStyle='#fff9ff';ctx.fillText('P',218,190);
+ if(state.phase==='junction'){rect(495,160,4,66,'#827c91');rect(487,149,20,38,'#5e596e');circle(497,160,5,state.light==='red'?'#ed8d96':'#807487');circle(497,176,5,state.light==='green'?'#94ceb0':'#7c7784');}
+ if(state.phase==='junction'&&['waiting','passing'].includes(state.moto)){
+  const px=state.moto==='passing'?447:536;const py=state.moto==='passing'?241:310;circle(px-9,py,6,'#655f76');circle(px+10,py,6,'#655f76');shape([[px-12,py-4],[px+12,py-4],[px+6,py-17],[px-7,py-14]],'#d8b0bc');rect(px-3,py-30,9,18,'#a095c2');circle(px+2,py-34,7,'#f6e6d8');shape([[px-5,py-36],[px-3,py-43],[px+7,py-43],[px+10,py-36]],'#82719c');
+ }
+ // 前擋風玻璃、車頭與兩側後照鏡。
+ if(!['outside','locked','success'].includes(state.phase)){
+  shape([[0,325],[100,312],[196,329],[565,329],[660,312],[760,325],[760,350],[0,350]],'#655d76');shape([[173,347],[202,325],[556,325],[587,347]],'#c5b4d5');shape([[190,347],[215,333],[545,333],[570,347]],'#ddcde5');shape([[29,308],[84,300],[96,320],[42,326]],'#776d88');shape([[676,300],[732,308],[718,326],[663,320]],'#776d88');shape([[38,310],[80,305],[88,317],[44,321]],'#b6b5ce');shape([[681,305],[723,310],[716,321],[671,317]],'#b6b5ce');
+ }else{shape([[280,317],[303,280],[445,280],[475,317],[481,350],[271,350]],'#b5a0ce');shape([[309,287],[438,287],[452,312],[295,312]],'#757c99');rect(279,330,31,8,'#f2e6dd');rect(446,330,26,8,'#f2e6dd');rect(350,336,49,11,'#e9dfee');}
+}
+function animate(time){if(time-lastTime>40){if(state&&state.speed>0&&!reducedMotion){roadOffset=(roadOffset+.008)%1;drawScene();}lastTime=time;}animationFrame=requestAnimationFrame(animate);}
+function help(open){if(open&&['failed','success'].includes(state.phase))return;$('helpOverlay').hidden=!open;if(open)$('closeHelpBtn').focus();else $('helpBtn').focus();}
+document.querySelectorAll('[data-action]').forEach(btn=>btn.addEventListener('click',()=>{if(!btn.disabled)act(btn.dataset.action);}));
+$('restartBtn').addEventListener('click',restart);$('helpBtn').addEventListener('click',()=>help(true));$('closeHelpBtn').addEventListener('click',()=>help(false));
+$('helpOverlay').addEventListener('click',event=>{if(event.target===$('helpOverlay'))help(false);});
+document.addEventListener('keydown',event=>{
+ const overlay=!$('resultOverlay').hidden?$('resultOverlay'):!$('helpOverlay').hidden?$('helpOverlay'):null;
+ if(overlay){if(event.key==='Escape'&&overlay===$('helpOverlay')){event.preventDefault();help(false);return;}if(event.key==='Tab'){const items=[...overlay.querySelectorAll('button:not(:disabled)')];const first=items[0],last=items[items.length-1];if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}}return;}
+ if(event.repeat||event.ctrlKey||event.metaKey||event.altKey)return;
+ if(event.code==='Space'&&document.activeElement?.tagName==='BUTTON')return;
+ const keys={ArrowUp:'gas',ArrowLeft:'turnLeft',ArrowRight:'turnRight',Space:'brake'};if(keys[event.code]){event.preventDefault();act(keys[event.code]);}
+});
+window.addEventListener('resize',drawScene);window.addEventListener('pagehide',()=>{saveStats();cancelAnimationFrame(animationFrame);});window.addEventListener('pageshow',event=>{if(event.persisted)animationFrame=requestAnimationFrame(animate);});
+startRound();animationFrame=requestAnimationFrame(animate);
+</script>
+</body>
+</html>
